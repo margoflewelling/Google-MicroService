@@ -5,12 +5,12 @@ require './services/geocoordinates'
 class Microservice < Sinatra::Base
 
   get '/locations' do
-    require "pry"; binding.pry
     items = params["items"]["data"]
-    distance = Distance.new
     location = items.first["attributes"]["user_location"]
     distance = items.first["attributes"]["distance"]
-    close_gear = distance.filter_distance(items, location, distance)
+    require "pry"; binding.pry
+    distance_service = Distance.new
+    close_gear = distance_service.filter_distance(items, location, distance)
     geocoordinates = Geocoordinates.new
     item_locations = geocoordinates.get_coordinates(close_gear)
   end
