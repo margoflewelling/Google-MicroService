@@ -1,6 +1,7 @@
 require 'sinatra/base'
 require './services/distance'
 require './services/geocoordinates'
+require 'json'
 
 class Microservice < Sinatra::Base
 
@@ -8,11 +9,12 @@ class Microservice < Sinatra::Base
     items = params["items"]["data"]
     location = items.first["attributes"]["user_location"]
     distance = items.first["attributes"]["distance"]
-    require "pry"; binding.pry
     distance_service = Distance.new
     close_gear = distance_service.filter_distance(items, location, distance)
     geocoordinates = Geocoordinates.new
-    item_locations = geocoordinates.get_coordinates(close_gear)
+    items_with_coordinates = geocoordinates.get_coordinates(close_gear)
+    content_type :json
+    items_with_coordinates.to_json
   end
 
 end

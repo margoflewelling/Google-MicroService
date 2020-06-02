@@ -16,5 +16,8 @@ describe "My Sinatra Application" do
 
     get '/locations', :items => json
     expect(last_response).to be_ok
+    items = JSON.parse(last_response.body)
+    expect(items.count).to eq(2)
+    expect(items.first["attributes"].has_key?("coordinates")).to eq(true)
   end
 end
