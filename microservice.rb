@@ -22,4 +22,5 @@ class Microservice < Sinatra::Base
     items_with_coordinates.to_json
   end
 
+
 end
