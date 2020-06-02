@@ -7,7 +7,7 @@ gem 'thin'
 gem 'rack'
 gem 'faraday'
 gem 'figaro'
-
+gem 'dotenv'
 
 group :test do
   gem 'rack-test'

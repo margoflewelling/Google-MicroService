@@ -1,5 +1,4 @@
 require 'faraday'
-# require './config/application'
 
 class Distance
 
@@ -18,7 +17,7 @@ class Distance
       f.params['units'] = 'imperial'
       f.params['origins'] = location
       f.params['destinations'] = gear_item[:attributes][:location]
-      f.params['key'] = 'AIzaSyAG-JC_Pm0MvlDjjeuLqeSI7bl8_mmizDg'
+      f.params['key'] = ENV['MAPS_KEY']
     end
     json = JSON.parse(conn.body, symbolize_names: true)
     json[:rows].first[:elements].first[:distance][:text].to_i

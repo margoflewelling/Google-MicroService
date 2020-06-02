@@ -11,7 +11,7 @@ class Geocoordinates
   def get_location(location)
     conn = Faraday.get("https://maps.googleapis.com/maps/api/geocode/json") do |f|
       f.params['address'] = location
-      f.params['key'] = 'AIzaSyAG-JC_Pm0MvlDjjeuLqeSI7bl8_mmizDg'
+      f.params['key'] = ENV['MAPS_KEY']
     end
     json = JSON.parse(conn.body, symbolize_names: true)
     json[:results].first[:access_points].first[:location]

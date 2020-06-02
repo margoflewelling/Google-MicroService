@@ -1,7 +1,12 @@
+require 'rubygems'
 require 'sinatra/base'
 require './services/distance'
 require './services/geocoordinates'
 require 'json'
+require 'dotenv'
+Dotenv.load
+
+
 
 class Microservice < Sinatra::Base
 
