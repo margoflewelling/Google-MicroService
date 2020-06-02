@@ -22,4 +22,12 @@ class Microservice < Sinatra::Base
     items_with_coordinates.to_json
   end
 
+  get '/user_location' do
+    city = params["items"]["data"].first["attributes"]["user_location"]
+    geocoordinates = Geocoordinates.new
+    user_location = geocoordinates.get_location(city)
+    content_type :json
+    user_location.to_json
+  end
+
 end
