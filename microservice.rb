@@ -12,7 +12,8 @@ Dotenv.load
 class Microservice < Sinatra::Base
 
   post '/locations' do
-    items = params["items"]["data"]
+    # items = params["items"]["data"]
+    items = JSON.parse(params["items"])["data"]
     location = items.first["attributes"]["user_location"]
     distance = items.first["attributes"]["distance"]
     distance_service = Distance.new
@@ -28,7 +29,8 @@ class Microservice < Sinatra::Base
   end
 
   post '/user_location' do
-    city = params["items"]["data"].first["attributes"]["user_location"]
+    items = JSON.parse(params["items"])["data"]
+    city = items.first["attributes"]["user_location"]
     geocoordinates = Geocoordinates.new
     user_location = geocoordinates.get_location(city)
     content_type :json

@@ -2,8 +2,8 @@ class Geocoordinates
 
   def get_coordinates(gear_items)
     gear_items.each do |gear_item|
-      location = get_location(gear_item[:attributes][:location])
-      gear_item[:attributes][:coordinates] = location
+      location = get_location(gear_item["attributes"]["location"])
+      gear_item["attributes"]["coordinates"] = location
     end
     gear_items
   end

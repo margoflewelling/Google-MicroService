@@ -16,7 +16,7 @@ class Distance
     conn = Faraday.get("https://maps.googleapis.com/maps/api/distancematrix/json") do |f|
       f.params['units'] = 'imperial'
       f.params['origins'] = location
-      f.params['destinations'] = gear_item[:attributes][:location]
+      f.params['destinations'] = gear_item["attributes"]["location"]
       f.params['key'] = ENV['MAPS_KEY']
     end
     json = JSON.parse(conn.body, symbolize_names: true)
