@@ -25,6 +25,10 @@ class Microservice < Sinatra::Base
     items_with_coordinates.to_json
   end
 
+  get '/' do
+    "hi"
+  end
+  
   post '/user_location' do
     city = params["items"]["data"].first["attributes"]["user_location"]
     geocoordinates = Geocoordinates.new
