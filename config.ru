@@ -1,3 +1,2 @@
-require 'rubygems'
-require './microservice'
-run Sinatra::Application
+require 'microservice'
+run Microservice.new
