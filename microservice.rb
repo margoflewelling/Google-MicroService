@@ -5,6 +5,8 @@ require './services/geocoordinates'
 require 'json'
 require 'dotenv'
 require 'thin'
+require 'bundler'
+Bundler.require
 Dotenv.load
 
 
