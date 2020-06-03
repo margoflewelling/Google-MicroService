@@ -10,9 +10,9 @@ describe "My Sinatra Application" do
 
   it "should return items with coordinates" do
    json = {"data"=>
-      [{"id"=>"1137", "type"=>"gear_item", "attributes"=>{"id"=>1137, "name"=>"Helmet", "location"=>"Denver, CO", "user_location"=>"Denver, CO", "distance"=>"15"}},
-       {"id"=>"1139", "type"=>"gear_item", "attributes"=>{"id"=>1139, "name"=>"Purple Helmet", "location"=>"Denver, CO", "user_location"=>"Denver, CO", "distance"=>"15"}},
-       {"id"=>"1141", "type"=>"gear_item", "attributes"=>{"id"=>1141, "name"=>"Cool Helmet", "location"=>"Fort Collins, CO", "user_location"=>"Denver, CO", "distance"=>"15"}}]}
+      [{"id"=>"1137", "type"=>"gear_item", "attributes"=>{"id"=>1137, "name"=>"Helmet", "location"=>"1662 South Pearl St, Denver, CO 80210", "user_location"=>"Denver, CO", "distance"=>"15"}},
+       {"id"=>"1139", "type"=>"gear_item", "attributes"=>{"id"=>1139, "name"=>"Purple Helmet", "location"=>"1300 South Pearl St, Denver, CO 80210", "user_location"=>"Denver, CO", "distance"=>"15"}},
+       {"id"=>"1141", "type"=>"gear_item", "attributes"=>{"id"=>1141, "name"=>"Cool Helmet", "location"=>"813 W Mulberry St, Fort Collins, CO 80521", "user_location"=>"Denver, CO", "distance"=>"15"}}]}
 
     get '/locations', :items => json
     expect(last_response).to be_ok
@@ -23,9 +23,9 @@ describe "My Sinatra Application" do
 
   it "should return user_location endpoint" do
     json = {"data"=>
-       [{"id"=>"1137", "type"=>"gear_item", "attributes"=>{"id"=>1137, "name"=>"Helmet", "location"=>"Denver, CO", "user_location"=>"Denver, CO", "distance"=>"15"}},
-        {"id"=>"1139", "type"=>"gear_item", "attributes"=>{"id"=>1139, "name"=>"Purple Helmet", "location"=>"Denver, CO", "user_location"=>"Denver, CO", "distance"=>"15"}},
-        {"id"=>"1141", "type"=>"gear_item", "attributes"=>{"id"=>1141, "name"=>"Cool Helmet", "location"=>"Fort Collins, CO", "user_location"=>"Denver, CO", "distance"=>"15"}}]}
+       [{"id"=>"1137", "type"=>"gear_item", "attributes"=>{"id"=>1137, "name"=>"Helmet", "location"=>"1662 South Pearl St, Denver, CO 80210", "user_location"=>"Denver, CO", "distance"=>"15"}},
+        {"id"=>"1139", "type"=>"gear_item", "attributes"=>{"id"=>1139, "name"=>"Purple Helmet", "location"=>"1300 South Pearl St, Denver, 80210 CO", "user_location"=>"Denver, CO", "distance"=>"15"}},
+        {"id"=>"1141", "type"=>"gear_item", "attributes"=>{"id"=>1141, "name"=>"Cool Helmet", "location"=>"813 W Mulberry St, Fort Collins, CO 80521", "user_location"=>"Denver, CO", "distance"=>"15"}}]}
     get '/user_location', :items => json
     expect(last_response).to be_ok
     location = JSON.parse(last_response.body)
