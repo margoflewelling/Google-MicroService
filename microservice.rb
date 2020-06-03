@@ -7,34 +7,35 @@ require 'json'
 require 'dotenv'
 Dotenv.load
 
-
-
 class Microservice < Sinatra::Base
 
   post '/locations' do
-    # items = params["items"]["data"]
-    items = JSON.parse(params["items"])["data"]
-    location = items.first["attributes"]["user_location"]
-    distance = items.first["attributes"]["distance"]
-    distance_service = Distance.new
-    close_gear = distance_service.filter_distance(items, location, distance)
-    geocoordinates = Geocoordinates.new
-    items_with_coordinates = geocoordinates.get_coordinates(close_gear)
-    content_type :json
-    items_with_coordinates.to_json
-  end
-
-  get '/' do
-    "hi"
+    close_gear = gear_within_distance(params)
+    gear_with_coordinates(close_gear).to_json
   end
 
   post '/user_location' do
-    items = JSON.parse(params["items"])["data"]
-    city = items.first["attributes"]["user_location"]
     geocoordinates = Geocoordinates.new
-    user_location = geocoordinates.get_location(city)
-    content_type :json
-    user_location.to_json
+    geocoordinates.get_location(user_location(params)).to_json
+  end
+
+  def gear_with_coordinates(close_gear)
+    geocoordinates = Geocoordinates.new
+    geocoordinates.get_coordinates(close_gear)
+  end
+
+  def gear_within_distance(params)
+    distance = parsed_items(params).first["attributes"]["distance"]
+    distance_service = Distance.new
+    distance_service.filter_distance(parsed_items(params), user_location(params), distance)
+  end
+
+  def parsed_items(params)
+    JSON.parse(params["items"])["data"]
+  end
+
+  def user_location(params)
+    parsed_items(params).first["attributes"]["user_location"]
   end
 
 end
