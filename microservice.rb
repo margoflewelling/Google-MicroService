@@ -4,6 +4,7 @@ require './services/distance'
 require './services/geocoordinates'
 require 'json'
 require 'dotenv'
+require 'thin'
 Dotenv.load
 
 
