@@ -1,12 +1,10 @@
 require 'rubygems'
+require 'sinatra'
 require 'sinatra/base'
 require './services/distance'
 require './services/geocoordinates'
 require 'json'
 require 'dotenv'
-require 'thin'
-require 'bundler'
-Bundler.require
 Dotenv.load
 
 
@@ -28,7 +26,7 @@ class Microservice < Sinatra::Base
   get '/' do
     "hi"
   end
-  
+
   post '/user_location' do
     city = params["items"]["data"].first["attributes"]["user_location"]
     geocoordinates = Geocoordinates.new

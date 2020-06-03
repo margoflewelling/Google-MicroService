@@ -1,2 +1,2 @@
-require 'microservice'
-run Microservice.new
+require './microservice'
+run Sinatra::Microservice
