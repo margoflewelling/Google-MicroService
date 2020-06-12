@@ -13,7 +13,6 @@ describe "My Sinatra Application" do
     post '/locations', :items => json
     expect(last_response).to be_ok
     items = JSON.parse(last_response.body)
-    require "pry"; binding.pry
     expect(items.count).to eq(2)
     expect(items.first["attributes"].has_key?("coordinates")).to eq(true)
   end
@@ -24,7 +23,6 @@ describe "My Sinatra Application" do
     post '/user_location', :items => json
     expect(last_response).to be_ok
     location = JSON.parse(last_response.body)
-    require "pry"; binding.pry
     expect(location.is_a? Hash).to eq(true)
     expect(location.has_key?("latitude")).to eq(true)
     expect(location.has_key?("longitude")).to eq(true)

@@ -14,7 +14,9 @@ class Geocoordinates
       f.params['key'] = ENV['MAPS_KEY']
     end
     json = JSON.parse(conn.body, symbolize_names: true)
-    json[:results].first[:access_points].first[:location]
+    # json[:results].first[:access_points].first[:location]
+    lat_lon = json[:results].first[:geometry][:location]
+    {latitude: lat_lon[:lat], longitude: lat_lon[:lng]}
   end
 
 end
